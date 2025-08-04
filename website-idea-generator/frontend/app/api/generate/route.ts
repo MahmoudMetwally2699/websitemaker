@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
       );
     }    // Call the actual NestJS backend with MongoDB
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    console.log('Calling backend at:', apiUrl);
+
     const response = await fetch(`${apiUrl}/sections/generate`, {
       method: 'POST',
       headers: {
@@ -22,8 +24,12 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({ idea: body.idea }),
     });
 
+    console.log('Backend response status:', response.status);
+
     if (!response.ok) {
-      throw new Error(`Backend responded with status: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Backend error response:', errorText);
+      throw new Error(`Backend responded with status: ${response.status} - ${errorText}`);
     }
 
     const nestjsResponse = await response.json();
