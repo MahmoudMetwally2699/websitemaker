@@ -4,6 +4,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",  "env": {
-    "NEXT_PUBLIC_API_URL": "https://website-idea-generator-backend.vercel.app"
+    "NEXT_PUBLIC_API_URL": "https://your-actual-backend-url.vercel.app"
   }
 }
